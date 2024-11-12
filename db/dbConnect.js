@@ -8,12 +8,7 @@ if (!mongoURI) {
     process.exit(1); // Exit if the URI is missing
 }
 
-mongoose.connect(mongoURI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    connectTimeoutMS: 30000, // Increase timeout
-    serverSelectionTimeoutMS: 30000, // Increase server selection timeout
-})
+mongoose.connect(mongoURI)
     .then(() => {
         console.log('MongoDB Connected Successfully');
     })
@@ -34,6 +29,7 @@ mongoose.connection.on('disconnected', () => {
 });
 
 module.exports = mongoose;
+
 
 // const mongoose = require('mongoose');
 // require('dotenv').config();  
