@@ -74,11 +74,11 @@ exports.getUser = async (req, res) => {
         }
 
         res.status(200).json(user);
-    } catch (error)
-    {
-        console.error('Error fetching user details:', error);
-        res.status(500).json({ message: 'Internal server error' });
+    } catch (error) {
+        console.error('Error during signup:', error.message, error.stack);
+        res.status(500).json({ message: 'Internal server error', error: error.message });
     }
+    
 };
 
 
