@@ -19,13 +19,27 @@ const webhookRoutes = require('./routes/paymentRoutes');
 app.use('/api/webhook', webhookRoutes); 
 
 // CORS Configuration
-app.use(
-    cors({
-      origin: process.env.FRONTEND_URL || 'https://luxury-rental.netlify.app', // Allow React app
-      methods: ['GET', 'POST', 'PUT', 'DELETE'], // Allowed methods
-      credentials: true, // Allow credentials (cookies, authorization headers)
-    })
-  );
+const allowedOrigins = [process.env.FRONTEND_URL, 'http://localhost:3000'];
+
+app.use(cors({
+    origin: (origin, callback) => {
+        if (!origin || allowedOrigins.includes(origin)) {
+            callback(null, true);
+        } else {
+            callback(new Error('Not allowed by CORS'));
+        }
+    },
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    credentials: true, // Allow cookies and authorization headers
+}));
+
+// app.use(
+//     cors({
+//       origin: process.env.FRONTEND_URL || 'https://luxury-rental.netlify.app', // Allow React app
+//       methods: ['GET', 'POST', 'PUT', 'DELETE'], // Allowed methods
+//       credentials: true, // Allow credentials (cookies, authorization headers)
+//     })
+//   );
 // app.use(cors());
 // app.use(cors({
 //     origin: process.env.FRONTEND_URL, 
