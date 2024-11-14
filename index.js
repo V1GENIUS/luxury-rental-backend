@@ -17,12 +17,21 @@ const port = process.env.PORT || 4000;
 
 const webhookRoutes = require('./routes/paymentRoutes'); 
 app.use('/api/webhook', webhookRoutes); 
-app.use(cors());
-app.use(cors({
-    origin: process.env.FRONTEND_URL, 
-    methods: ['GET', 'POST'],
-    credentials: true,
-}));
+
+// CORS Configuration
+app.use(
+    cors({
+      origin: process.env.FRONTEND_URL || 'http://localhost:3000', // Allow React app
+      methods: ['GET', 'POST', 'PUT', 'DELETE'], // Allowed methods
+      credentials: true, // Allow credentials (cookies, authorization headers)
+    })
+  );
+// app.use(cors());
+// app.use(cors({
+//     origin: process.env.FRONTEND_URL, 
+//     methods: ['GET', 'POST'],
+//     credentials: true,
+// }));
 app.use(express.json());
 
 
@@ -47,7 +56,6 @@ app.use((err, req, res, next) => {
   
 
 app.use('/api', paymentRoutes);
-
 
 
 // Start the server

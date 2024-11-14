@@ -5,6 +5,7 @@ require('dotenv').config();
 
 // Signup logic
 exports.signup = async (req, res) => {
+    console.log('Signup request received:', req.body);
     const { name, email, password } = req.body;
 
     try {
