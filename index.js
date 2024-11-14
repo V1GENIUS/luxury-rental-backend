@@ -21,7 +21,7 @@ app.use('/api/webhook', webhookRoutes);
 // CORS Configuration
 app.use(
     cors({
-      origin: process.env.FRONTEND_URL || 'http://localhost:3000', // Allow React app
+      origin: process.env.FRONTEND_URL || 'https://luxury-rental.netlify.app', // Allow React app
       methods: ['GET', 'POST', 'PUT', 'DELETE'], // Allowed methods
       credentials: true, // Allow credentials (cookies, authorization headers)
     })
