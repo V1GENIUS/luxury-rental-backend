@@ -15,7 +15,7 @@ const paymentRoutes = require('./routes/paymentRoutes');
 const app = express();
 const port = process.env.PORT || 4000;
 
-const webhookRoutes = require('./routes/paymentRoutes'); 
+const webhookRoutes = require('./routes/paymentRoutes');
 app.use('/api/webhook', webhookRoutes); 
 
 // CORS Configuration
